@@ -52,5 +52,4 @@ class RememberMeComponentTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
-
 }

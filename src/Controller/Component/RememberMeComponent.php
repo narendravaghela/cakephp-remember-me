@@ -28,7 +28,7 @@ class RememberMeComponent extends Component
 
     /**
      * Other components
-     * 
+     *
      * @var array
      */
     public $components = ['Cookie'];
@@ -48,9 +48,9 @@ class RememberMeComponent extends Component
 
     /**
      * Stores data in cookie
-     * 
+     *
      * @param mixes $data Data to store in cookie
-     * @return boolean
+     * @return bool
      */
     public function rememberData($data = null)
     {
@@ -65,7 +65,7 @@ class RememberMeComponent extends Component
 
     /**
      * Returns data stored in cookie
-     * 
+     *
      * @return mixed Stored data otherwise false
      */
     public function getRememberedData()
@@ -81,12 +81,11 @@ class RememberMeComponent extends Component
 
     /**
      * Removes data
-     * 
+     *
      * @return void
      */
     public function removeRememberedData()
     {
         $this->Cookie->delete($this->config('cookieName'));
     }
-
 }
