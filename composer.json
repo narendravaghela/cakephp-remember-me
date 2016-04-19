@@ -1,6 +1,7 @@
 {
     "name": "narendravaghela/cakephp-remember-me",
     "description": "RememberMe plugin for CakePHP",
+    "license": "MIT",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "remember", "me"],
     "homepage": "https://github.com/narendravaghela/cakephp-remember-me",
