@@ -1,4 +1,5 @@
 <?php
+
 namespace RememberMe\Test\TestCase\Controller\Component;
 
 use Cake\Controller\ComponentRegistry;
@@ -51,4 +52,5 @@ class RememberMeComponentTest extends TestCase
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
+
 }
