@@ -44,9 +44,6 @@ class RememberMeComponent extends Component
         if (!$this->_config['cypherKey']) {
             $this->config('cypherKey', Security::salt());
         }
-        $this->Cookie->configKey($this->config('cookieName'), [
-            'key' => $this->config('cypherKey')
-        ]);
     }
 
     /**

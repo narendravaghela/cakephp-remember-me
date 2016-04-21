@@ -29,6 +29,9 @@ class RememberMeComponentTest extends TestCase
         parent::setUp();
         $registry = new ComponentRegistry();
         $this->RememberMe = new RememberMeComponent($registry);
+        $this->RememberMe->Cookie->configKey($this->RememberMe->config('cookieName'), [
+            'key' => $this->RememberMe->config('cypherKey')
+        ]);
     }
 
     /**
