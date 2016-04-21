@@ -44,6 +44,9 @@ class RememberMeComponent extends Component
         if (!$this->_config['cypherKey']) {
             $this->config('cypherKey', Security::salt());
         }
+		$this->Cookie->configKey($this->config('cookieName'), [
+			'key' => $this->config('cypherKey')
+		]);
     }
 
     /**
@@ -57,7 +60,6 @@ class RememberMeComponent extends Component
         if (empty($data)) {
             return false;
         }
-
         $encryptedData = Security::encrypt(serialize($data), $this->config('cypherKey'));
         $this->Cookie->write($this->config('cookieName'), $encryptedData, true, $this->config('period'));
         return true;
