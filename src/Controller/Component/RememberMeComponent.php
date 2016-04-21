@@ -58,7 +58,7 @@ class RememberMeComponent extends Component
             return false;
         }
 
-        $encryptedData = Security::cipher($data, $this->config('cypherKey'));
+        $encryptedData = Security::encrypt($data, $this->config('cypherKey'));
         $this->Cookie->write($this->config('cookieName'), $encryptedData, true, $this->config('period'));
         return true;
     }
@@ -72,7 +72,7 @@ class RememberMeComponent extends Component
     {
         $cookieData = $this->Cookie->read($this->config('cookieName'));
         if (!empty($cookieData)) {
-            $data = Security::cipher($cookieData, $this->config('cypherKey'));
+            $data = Security::decrypt($cookieData, $this->config('cypherKey'));
             return $data;
         } else {
             return false;
