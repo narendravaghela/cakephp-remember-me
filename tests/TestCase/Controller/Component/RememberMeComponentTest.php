@@ -3,6 +3,8 @@
 namespace RememberMe\Test\TestCase\Controller\Component;
 
 use Cake\Controller\ComponentRegistry;
+use Cake\Network\Request;
+use Cake\Network\Response;
 use Cake\TestSuite\TestCase;
 use RememberMe\Controller\Component\RememberMeComponent;
 
@@ -15,7 +17,7 @@ class RememberMeComponentTest extends TestCase
     /**
      * Test subject
      *
-     * @var \RememberMe\Controller\Component\RememberMeComponent
+     * @var RememberMeComponent
      */
     public $RememberMe;
 
@@ -27,7 +29,14 @@ class RememberMeComponentTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $registry = new ComponentRegistry();
+		$request = new Request();
+        $response = new Response();
+        $this->controller = $this->getMock(
+            'Cake\Controller\Controller',
+            null,
+            [$request, $response]
+        );
+        $registry = new ComponentRegistry($this->controller);
         $this->RememberMe = new RememberMeComponent($registry);
     }
 
