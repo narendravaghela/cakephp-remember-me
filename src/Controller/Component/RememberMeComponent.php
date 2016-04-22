@@ -46,7 +46,8 @@ class RememberMeComponent extends Component
         }
 
 		$this->Cookie->configKey($this->config('cookieName'), [
-			'key' => $this->config('cypherKey')
+			'key' => $this->config('cypherKey'),
+			'expires' => $this->config('period')
 		]);
     }
 
@@ -62,7 +63,7 @@ class RememberMeComponent extends Component
             return false;
         }
         $encryptedData = Security::encrypt(serialize($data), $this->config('cypherKey'));
-        $this->Cookie->write($this->config('cookieName'), $encryptedData, true, $this->config('period'));
+        $this->Cookie->write($this->config('cookieName'), $encryptedData);
         return true;
     }
 
