@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cakephp Remember Me by narendravaghela</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Cakephp Remember Me</h1>
+      <h2 class="project-tagline">Remember Me plugin for CakePHP 3</h2>
+      <a href="https://github.com/narendravaghela/cakephp-remember-me" class="btn">View on GitHub</a>
+      <a href="https://github.com/narendravaghela/cakephp-remember-me/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/narendravaghela/cakephp-remember-me/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="rememberme-plugin-for-cakephp" class="anchor" href="#rememberme-plugin-for-cakephp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RememberMe plugin for CakePHP</h1>
+
+<p><a href="https://travis-ci.org/narendravaghela/cakephp-remember-me"><img src="https://travis-ci.org/narendravaghela/cakephp-remember-me.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/github/narendravaghela/cakephp-remember-me?branch=master"><img src="https://codecov.io/github/narendravaghela/cakephp-remember-me/coverage.svg?branch=master" alt="codecov.io"></a></p>
+
+<p>This plugin provides a basic functionality to store user data in Cookies of your CakePHP applications for login and remember user in specific browser.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>This plugin has the following requirements:</p>
+
+<ul>
+<li>CakePHP 3.0.0 or greater.</li>
+<li>PHP 5.4.16 or greater.</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>You can install this plugin into your CakePHP application using <a href="http://getcomposer.org">composer</a>.</p>
+
+<pre><code>composer require narendravaghela/cakephp-remember-me
+</code></pre>
+
+<p>After installation, <a href="http://book.cakephp.org/3.0/en/plugins.html#loading-a-plugin">Load the plugin</a></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c1">Plugin</span><span class="pl-k">::</span>load(<span class="pl-s"><span class="pl-pds">'</span>RememberMe<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<p>Or, you can load the plugin using the shell command</p>
+
+<div class="highlight highlight-source-shell"><pre>$ bin/cake plugin load RememberMe</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>To use this, simply load the RememberMe component from this plugin into your AppController or UsersController.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>loadComponent(<span class="pl-s"><span class="pl-pds">'</span>RememberMe.RememberMe<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<p>You can optionally pass the configuration options for this component.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>loadComponent(<span class="pl-s"><span class="pl-pds">'</span>RememberMe.RememberMe<span class="pl-pds">'</span></span>, [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>cypherKey<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>17485937564892755682047369192734583655920926<span class="pl-pds">"</span></span>, <span class="pl-c">// Random unuqie string to encrypt/decrypt data. If not set, default salt value of the application will be used.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>cookieName<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>rememberme<span class="pl-pds">"</span></span>, <span class="pl-c">// Name of the cookie.</span></span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>period<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>14 Days<span class="pl-pds">'</span></span> <span class="pl-c">// Time period</span></span>
+<span class="pl-s1">]);</span></pre></div>
+
+<p>Here, the basic flow should something like this:</p>
+
+<ul>
+<li>Find the user from the database</li>
+<li>Validate</li>
+<li>If user has selected "Remember me" checkbox, store the user data using this component.</li>
+<li>Next time, when user (any user) visits the application, check the stored data using <code>getRememberedData()</code>.</li>
+<li>Use the data returned by <code>getRememberedData()</code> and validate against the database and if everything goes well, create a session of the user and make him logged in.</li>
+<li>If user manually logs out, simply delete the data from Cookie using <code>removeRememberedData()</code>.</li>
+</ul>
+
+<h3>
+<a id="remember-data" class="anchor" href="#remember-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Remember data</h3>
+
+<p>In your <code>login</code> action or the action from where user logs into your application, use the <code>rememberData()</code> function and pass the required data of user being logged in.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">RememberMe</span><span class="pl-k">-&gt;</span>rememberData(<span class="pl-s"><span class="pl-pds">"</span>data@example.com<span class="pl-pds">"</span></span>); <span class="pl-c">// email address of user being logged in</span></span>
+<span class="pl-s1"><span class="pl-c">// or you can use the array as well</span></span>
+<span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">RememberMe</span><span class="pl-k">-&gt;</span>rememberData([</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>foo@bar.com<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">  <span class="pl-s"><span class="pl-pds">'</span>someUniqueKey<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>someuniquevalue<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">]);</span></pre></div>
+
+<h3>
+<a id="get-remembered-data" class="anchor" href="#get-remembered-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get remembered data</h3>
+
+<p>Generally, in our <code>beforeFilter()</code> callback, we check whether user is logged in or not. Here, we can use <code>getRememberedData()</code> to retrieve the data that we have stored in our login action earlier.
+If we find something, then we can check it against our user table to check whether there is a user or not.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$isRemembered</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">RememberMe</span><span class="pl-k">-&gt;</span>getRememberedUser();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// code to check this data against database</span></span>
+<span class="pl-s1"><span class="pl-c">// set the session</span></span>
+<span class="pl-s1"><span class="pl-c">// ...</span></span></pre></div>
+
+<h3>
+<a id="delete-data" class="anchor" href="#delete-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delete data</h3>
+
+<p>If you need to remove user data, just call the <code>removeRememberedData()</code> and it will delete the data from Cookie.</p>
+
+<p>That is it.</p>
+
+<h2>
+<a id="reporting-issues" class="anchor" href="#reporting-issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reporting Issues</h2>
+
+<p>If you have a problem with RememberMe, please open an issue on <a href="https://github.com/narendravaghela/cakephp-remember-me/issues">GitHub</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/narendravaghela/cakephp-remember-me">Cakephp Remember Me</a> is maintained by <a href="https://github.com/narendravaghela">narendravaghela</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
