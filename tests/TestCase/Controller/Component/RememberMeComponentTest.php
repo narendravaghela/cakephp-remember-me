@@ -1,4 +1,17 @@
 <?php
+/**
+ * Remember Me plugin for CakePHP 3
+ * Copyright (c) Narendra Vaghela (http://www.narendravaghela.com)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.md
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Narendra Vaghela (http://www.narendravaghela.com)
+ * @link          https://github.com/narendravaghela/cakephp-remember-me
+ * @since         1.0
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 
 namespace RememberMe\Test\TestCase\Controller\Component;
 
@@ -7,7 +20,7 @@ use Cake\TestSuite\TestCase;
 use RememberMe\Controller\Component\RememberMeComponent;
 
 /**
- * RememberMe\Controller\Component\RememberMeComponent Test Case
+ * RememberMeComponent Test Case
  */
 class RememberMeComponentTest extends TestCase
 {
