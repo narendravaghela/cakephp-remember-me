@@ -74,7 +74,7 @@ Generally, in our `beforeFilter()` callback, we check whether user is logged in 
 If we find something, then we can check it against our user table to check whether there is a user or not.
 
 ```php
-$isRemembered = $this->RememberMe->getRememberedUser();
+$isRemembered = $this->RememberMe->getRememberedData();
 
 // code to check this data against database
 // set the session
