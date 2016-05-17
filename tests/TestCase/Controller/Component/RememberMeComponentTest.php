@@ -98,7 +98,7 @@ class RememberMeComponentTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $this->RememberMe->getRememberedData());
 
         $this->RememberMe->removeRememberedData();
-        $obj = (object) ['foo' => 'bar'];
+        $obj = (object)['foo' => 'bar'];
         $this->RememberMe->rememberData($obj);
         $this->assertNotEmpty($this->RememberMe->getRememberedData());
         $this->assertEquals($obj, $this->RememberMe->getRememberedData());
@@ -119,7 +119,7 @@ class RememberMeComponentTest extends TestCase
         $this->RememberMe->removeRememberedData();
         $this->assertEquals(false, $this->RememberMe->getRememberedData());
 
-        $obj = (object) ['foo' => 'bar'];
+        $obj = (object)['foo' => 'bar'];
         $this->RememberMe->rememberData($obj);
         $this->RememberMe->removeRememberedData();
         $this->assertEquals(false, $this->RememberMe->getRememberedData());
