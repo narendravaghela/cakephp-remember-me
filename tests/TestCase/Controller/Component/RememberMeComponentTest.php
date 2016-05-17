@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Remember Me plugin for CakePHP 3
  * Copyright (c) Narendra Vaghela (http://www.narendravaghela.com)
@@ -73,8 +74,8 @@ class RememberMeComponentTest extends TestCase
      */
     public function testRememberData()
     {
-		$this->assertFalse($this->RememberMe->rememberData());
-		$this->assertTrue($this->RememberMe->rememberData("data@example.com"));
+        $this->assertFalse($this->RememberMe->rememberData());
+        $this->assertTrue($this->RememberMe->rememberData("data@example.com"));
     }
 
     /**
@@ -84,43 +85,43 @@ class RememberMeComponentTest extends TestCase
      */
     public function testGetRememberedData()
     {
-		$this->RememberMe->removeRememberedData();
-		$this->assertFalse($this->RememberMe->getRememberedData());
+        $this->RememberMe->removeRememberedData();
+        $this->assertFalse($this->RememberMe->getRememberedData());
 
-		$this->RememberMe->rememberData("data@example.com");
-		$this->assertNotEmpty($this->RememberMe->getRememberedData());
-		$this->assertEquals("data@example.com", $this->RememberMe->getRememberedData());
+        $this->RememberMe->rememberData("data@example.com");
+        $this->assertNotEmpty($this->RememberMe->getRememberedData());
+        $this->assertEquals("data@example.com", $this->RememberMe->getRememberedData());
 
-		$this->RememberMe->removeRememberedData();
-		$this->RememberMe->rememberData(['foo' => 'bar']);
-		$this->assertNotEmpty($this->RememberMe->getRememberedData());
-		$this->assertEquals(['foo' => 'bar'], $this->RememberMe->getRememberedData());
+        $this->RememberMe->removeRememberedData();
+        $this->RememberMe->rememberData(['foo' => 'bar']);
+        $this->assertNotEmpty($this->RememberMe->getRememberedData());
+        $this->assertEquals(['foo' => 'bar'], $this->RememberMe->getRememberedData());
 
-		$this->RememberMe->removeRememberedData();
-		$obj = (object) ['foo' => 'bar'];
-		$this->RememberMe->rememberData($obj);
-		$this->assertNotEmpty($this->RememberMe->getRememberedData());
-		$this->assertEquals($obj, $this->RememberMe->getRememberedData());
+        $this->RememberMe->removeRememberedData();
+        $obj = (object) ['foo' => 'bar'];
+        $this->RememberMe->rememberData($obj);
+        $this->assertNotEmpty($this->RememberMe->getRememberedData());
+        $this->assertEquals($obj, $this->RememberMe->getRememberedData());
     }
 
-	/**
+    /**
      * Test removeRememberedData
      *
      * @return void
      */
     public function testRemoveRememberedData()
     {
-		$this->RememberMe->rememberData("data@example.com");
-		$this->RememberMe->removeRememberedData();
-		$this->assertEquals(false, $this->RememberMe->getRememberedData());
+        $this->RememberMe->rememberData("data@example.com");
+        $this->RememberMe->removeRememberedData();
+        $this->assertEquals(false, $this->RememberMe->getRememberedData());
 
-		$this->RememberMe->rememberData(['foo' => 'bar']);
-		$this->RememberMe->removeRememberedData();
-		$this->assertEquals(false, $this->RememberMe->getRememberedData());
+        $this->RememberMe->rememberData(['foo' => 'bar']);
+        $this->RememberMe->removeRememberedData();
+        $this->assertEquals(false, $this->RememberMe->getRememberedData());
 
-		$obj = (object) ['foo' => 'bar'];
-		$this->RememberMe->rememberData($obj);
-		$this->RememberMe->removeRememberedData();
-		$this->assertEquals(false, $this->RememberMe->getRememberedData());
+        $obj = (object) ['foo' => 'bar'];
+        $this->RememberMe->rememberData($obj);
+        $this->RememberMe->removeRememberedData();
+        $this->assertEquals(false, $this->RememberMe->getRememberedData());
     }
 }

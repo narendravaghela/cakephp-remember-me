@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Remember Me plugin for CakePHP 3
  * Copyright (c) Narendra Vaghela (http://www.narendravaghela.com)
@@ -61,10 +62,10 @@ class RememberMeComponent extends Component
             $this->config('cypherKey', Security::salt());
         }
 
-		$this->Cookie->configKey($this->config('cookieName'), [
-			'key' => $this->config('cypherKey'),
-			'expires' => $this->config('period')
-		]);
+        $this->Cookie->configKey($this->config('cookieName'), [
+            'key' => $this->config('cypherKey'),
+            'expires' => $this->config('period')
+        ]);
     }
 
     /**
@@ -79,13 +80,13 @@ class RememberMeComponent extends Component
             return false;
         }
 
-		if (is_object($data)) {
-			$store = json_encode($data);
-		} else {
-			$store = serialize($data);
-		}
+        if (is_object($data)) {
+            $store = json_encode($data);
+        } else {
+            $store = serialize($data);
+        }
 
-		$encryptedData = Security::encrypt($store, $this->config('cypherKey'));
+        $encryptedData = Security::encrypt($store, $this->config('cypherKey'));
         $this->Cookie->write($this->config('cookieName'), $encryptedData);
         return true;
     }
@@ -100,10 +101,10 @@ class RememberMeComponent extends Component
         $cookieData = $this->Cookie->read($this->config('cookieName'));
         if (!empty($cookieData)) {
             $store = Security::decrypt($cookieData, $this->config('cypherKey'));
-			$data = json_decode($store);
-			if (!$data) {
-				$data = unserialize($store);
-			}
+            $data = json_decode($store);
+            if (!$data) {
+                $data = unserialize($store);
+            }
             return $data;
         } else {
             return false;
