@@ -78,7 +78,14 @@ class RememberMeComponent extends Component
         if (empty($data)) {
             return false;
         }
-		$encryptedData = Security::encrypt(json_encode($data), $this->config('cypherKey'));
+
+		if (is_object($data)) {
+			$store = json_encode($data);
+		} else {
+			$store = serialize($data);
+		}
+
+		$encryptedData = Security::encrypt($store, $this->config('cypherKey'));
         $this->Cookie->write($this->config('cookieName'), $encryptedData);
         return true;
     }
@@ -92,7 +99,11 @@ class RememberMeComponent extends Component
     {
         $cookieData = $this->Cookie->read($this->config('cookieName'));
         if (!empty($cookieData)) {
-            $data = json_decode(Security::decrypt($cookieData, $this->config('cypherKey')));
+            $store = Security::decrypt($cookieData, $this->config('cypherKey'));
+			$data = json_decode($store);
+			if (!$data) {
+				$data = unserialize($store);
+			}
             return $data;
         } else {
             return false;
