@@ -5,6 +5,8 @@
 
 This plugin provides a basic functionality to store user data in Cookies of your CakePHP applications for login and remember user in specific browser.
 
+Read this [blog post](http://blog.narendravaghela.com/2015/01/cakephp-user-login-with-remember-me.html) for detailed example.
+
 ## Requirements
 
 This plugin has the following requirements:
