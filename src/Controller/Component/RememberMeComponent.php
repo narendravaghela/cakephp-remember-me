@@ -88,6 +88,7 @@ class RememberMeComponent extends Component
 
         $encryptedData = Security::encrypt($store, $this->config('cypherKey'));
         $this->Cookie->write($this->config('cookieName'), $encryptedData);
+
         return true;
     }
 
@@ -105,6 +106,7 @@ class RememberMeComponent extends Component
             if (!$data) {
                 $data = unserialize($store);
             }
+
             return $data;
         } else {
             return false;
